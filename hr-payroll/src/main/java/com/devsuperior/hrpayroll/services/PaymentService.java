@@ -1,27 +1,21 @@
 package com.devsuperior.hrpayroll.services;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.devsuperior.hrpayroll.entities.Payment;
 import com.devsuperior.hrpayroll.entities.Worker;
-import com.devsuperior.hrpayroll.feignclients.WorkerFeignClient;
+import com.devsuperior.hrpayroll.feignclients.WorkerFeign;
 
 @Service
 public class PaymentService {
 	
 	@Autowired
-	private WorkerFeignClient workerFeignClient;
+	private WorkerFeign workerClient;
 	
 	public Payment getPayment(long workerId, int days) {
 		
-		Worker worker = workerFeignClient.findById(workerId).getBody();
-		
+		Worker worker = workerClient.findById(workerId).getBody();
 		return new Payment(worker.getName(),worker.getDailyIncome(), days);
 	}
 }
