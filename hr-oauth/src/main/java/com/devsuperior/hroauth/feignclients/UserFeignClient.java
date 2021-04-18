@@ -1,4 +1,4 @@
-package com.devsuperior.hroauth.feignClients;
+package com.devsuperior.hroauth.feignclients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import com.devsuperior.hroauth.entities.User;
 @Component
 @FeignClient(name="hr-user", path="/users")
 public interface UserFeignClient {
-	
 	
 	@GetMapping(value = "/search")
 	public ResponseEntity<User> findByEmail(@RequestParam String email);
